@@ -26,5 +26,10 @@ public class BulletMover : MonoBehaviour
         }
         transform.Translate(transform.up * Time.deltaTime * speed);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(this.gameObject);
+    }
 }
 

@@ -31,4 +31,12 @@ public class PlayerMovement : MonoBehaviour
             0f
         );
     }
+
+    public void Die()
+    {
+        var animator = GetComponent<Animator>();
+        animator.SetBool("destroy", true);
+        Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
+    }
+
 }

@@ -10,7 +10,6 @@ public class Boundary : MonoBehaviour
         if (other.gameObject.tag == "bullet")
         {
             Destroy(other.gameObject);
-            Debug.Log("Deleted");
         }
 
     }
