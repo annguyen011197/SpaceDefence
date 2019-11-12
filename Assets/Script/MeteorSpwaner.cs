@@ -9,6 +9,7 @@ public class SpawnerOption
     public float angle;
     public int size;
     public int distance;
+    public int pulse;
 }
 public class MeteorSpwaner : MonoBehaviour
 {
@@ -37,7 +38,7 @@ public class MeteorSpwaner : MonoBehaviour
         {
             GameObject gameObject = Instantiate(meteor.gameObject);
             gameObject.transform.position = randomPostion();
-            gameObject.GetComponent<MeteorController>().AddForceWithAngle(option.angle);
+            gameObject.GetComponent<MeteorController>().AddForceWithAngle(option.angle, option.pulse);
             yield return new WaitForSeconds(1);
         }
     }

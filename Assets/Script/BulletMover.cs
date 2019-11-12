@@ -29,7 +29,11 @@ public class BulletMover : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(this.gameObject);
+        if (other.gameObject.tag == "meteor")
+        {
+            Destroy(this.gameObject);
+        }
+
     }
 }
 

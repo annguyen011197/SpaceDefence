@@ -7,6 +7,8 @@ TagManager:
   - bullet
   - player
   - gameController
+  - meteorBoundary
+  - meteor
   layers:
   - Default
   - TransparentFX

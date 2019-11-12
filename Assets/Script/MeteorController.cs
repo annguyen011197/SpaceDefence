@@ -38,7 +38,6 @@ public class MeteorController : MonoBehaviour
             range++;
         }
         health++;
-        AddForceWithAngle(0);
     }
 
     private float getX(int range)
@@ -80,14 +79,14 @@ public class MeteorController : MonoBehaviour
         text.transform.position = textPos;
     }
 
-    public void AddForceWithAngle(float angle)
+    public void AddForceWithAngle(float angle, int pulse)
     {
         Debug.Log("Called");
         angle = (angle % 180);
         if (angle > 90) angle = angle - 90;
         if (angle < -90) angle = angle + 90;
         Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.down;
-        this.GetComponent<Rigidbody>().AddForce(dir * 5);
+        this.GetComponent<Rigidbody>().AddForce(dir * pulse);
     }
 
     public void OnHitted(MeteorTrigger trigger, int id)

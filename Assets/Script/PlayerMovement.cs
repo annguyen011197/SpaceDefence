@@ -9,13 +9,14 @@ public class PlayerMovement : MonoBehaviour
     public float speed;
     public float xMax;
     public float xMin;
+    public bool isDie;
     void Awake()
     {
         rigi = this.GetComponent<Rigidbody>();
     }
     void Start()
     {
-
+        isDie = false;
     }
 
     // Update is called once per frame
@@ -34,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
+        isDie = true;
         var animator = GetComponent<Animator>();
         animator.SetBool("destroy", true);
         Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
