@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public struct Spawner
@@ -14,11 +15,14 @@ public class GameController : MonoBehaviour
     public PlayerMovement player;
     public Text textScoreUI;
     public GameOver gameOver;
+    public GameObject pauseMenu;
     private float time = 0f;
 
     public Spawner[] spawners;
     public int delayTime;
+    private bool isPaused = false;
     private int currIndex = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +49,13 @@ public class GameController : MonoBehaviour
         player.isDie = true;
     }
 
+    public void PauseGame()
+    {
+        Time.timeScale = isPaused ? 1 : 0;
+        isPaused = !isPaused;
+        pauseMenu.SetActive(isPaused);
+    }
+
     private IEnumerator ActiveSpawn()
     {
         foreach (var item in spawners)
@@ -58,5 +69,24 @@ public class GameController : MonoBehaviour
     public void DestroyPlayer()
     {
         player.Die();
+    }
+
+    public void OpenMainMenu()
+    {
+        StartCoroutine(loadMainMenu());
+    }
+
+    private IEnumerator loadMainMenu()
+    {
+        var asyncLoader = SceneManager.LoadSceneAsync("Menu");
+        asyncLoader.allowSceneActivation = false;
+        while (!asyncLoader.isDone)
+        {
+            if (asyncLoader.progress >= .9f)
+            {
+                asyncLoader.allowSceneActivation = true;
+            }
+            yield return null;
+        }
     }
 }
